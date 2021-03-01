@@ -1,4 +1,4 @@
-package com.example.trelloclone
+package com.example.trelloclone.activites
 
 import android.os.Bundle
 import android.view.WindowManager

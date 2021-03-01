@@ -1,8 +1,8 @@
-package com.example.trelloclone
+package com.example.trelloclone.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
+import com.example.trelloclone.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
