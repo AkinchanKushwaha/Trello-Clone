@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.example.trelloclone.R
+import com.example.trelloclone.firebase.FirestoreClass
+import com.example.trelloclone.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_in.view.*
@@ -17,6 +19,14 @@ class SignUpActivity : BaseActivity() {
         setSupportActionBar(toolbar_sign_up_activity)
 
         setupActionBar()
+    }
+
+    fun userRegisteredSuccess(){
+        Toast.makeText(this, "You have successfully registered.", Toast.LENGTH_SHORT).show()
+        hideProgressDialog()
+
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 
     private fun setupActionBar(){
@@ -45,13 +55,14 @@ class SignUpActivity : BaseActivity() {
             FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
-                        hideProgressDialog()
+
                         if (task.isSuccessful) {
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             val registeredEmail = firebaseUser.email!!
-                            Toast.makeText(this, "$name you have successfully registered the email address $registeredEmail", Toast.LENGTH_SHORT).show()
-                            FirebaseAuth.getInstance().signOut()
-                            finish()
+
+                            val user = User(firebaseUser.uid, name, registeredEmail)
+
+                            FirestoreClass().registerUser(this, user)
                         } else {
                             Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
                         }
