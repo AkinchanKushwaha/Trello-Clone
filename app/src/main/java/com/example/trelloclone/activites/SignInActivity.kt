@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.trelloclone.R
+import com.example.trelloclone.models.User
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : BaseActivity() {
@@ -25,6 +26,11 @@ class SignInActivity : BaseActivity() {
             signInRegisteredUser()
         }
     }
+     fun signInSuccess(user: Pair<Task<DocumentSnapshot>, Class<User>>){
+         hideProgressDialog()
+         startActivity(Intent(this@SignInActivity,MainActivity::class.java )  )
+         finish()
+     }
 
     private fun setupActionBar() {
 
