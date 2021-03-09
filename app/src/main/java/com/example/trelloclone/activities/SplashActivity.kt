@@ -1,4 +1,4 @@
-package com.example.trelloclone.activites
+package com.example.trelloclone.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.trelloclone.R
 import com.example.trelloclone.firebase.FirestoreClass
-import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

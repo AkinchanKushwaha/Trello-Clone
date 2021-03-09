@@ -1,7 +1,6 @@
-package com.example.trelloclone.activites
+package com.example.trelloclone.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.trelloclone.R
 import kotlinx.android.synthetic.main.activity_intro.*

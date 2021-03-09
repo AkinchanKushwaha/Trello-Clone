@@ -1,52 +1,87 @@
 package com.example.trelloclone.firebase
 
+import android.app.Activity
 import android.util.Log
-import com.example.trelloclone.activites.SignInActivity
-import com.example.trelloclone.activites.SignUpActivity
+import com.example.trelloclone.activities.MainActivity
+import com.example.trelloclone.activities.SignInActivity
+import com.example.trelloclone.activities.SignUpActivity
 import com.example.trelloclone.models.User
 import com.example.trelloclone.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
+
+/**
+ * A custom class where we will add the operation performed for the firestore database.
+ */
 class FirestoreClass {
 
     private val mFireStore = FirebaseFirestore.getInstance()
 
-    fun registerUser(activity : SignUpActivity, userInfo: User){
+    /**
+     * A function to make an entry of the registered user in the firestore database.
+     */
+    fun registerUser(activity: SignUpActivity, userInfo: User) {
+
         mFireStore.collection(Constants.USERS)
             .document(getCurrentUserId())
             .set(userInfo, SetOptions.merge())
-            .addOnCompleteListener {
+            .addOnSuccessListener {
+
                 activity.userRegisteredSuccess()
-            }.addOnFailureListener {
-                Log.e(activity.javaClass.simpleName, "Error writing document", it)
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error writing document", e)
             }
     }
 
-    fun getCurrentUserId(): String{
-        var currentUser = FirebaseAuth.getInstance().currentUser
-        var currentUserId = ""
-        if(currentUser != null){
-            currentUserId = currentUser.uid
-        }
-        return currentUserId
-    }
+    /**
+     * A function to SignIn using firebase and get the user details from Firestore Database.
+     */
+    fun signInUser(activity: Activity) {
 
-    fun signInUser(activity : SignInActivity){
         mFireStore.collection(Constants.USERS)
             .document(getCurrentUserId())
             .get()
-            .addOnCompleteListener {document ->
-                val loggedInUser = document to User::class.java
-                if(loggedInUser != null){
-                    activity.signInSuccess(loggedInUser)
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val loggedInUser = document.toObject(User::class.java)!!
+
+                when (activity) {
+                    is SignInActivity -> {
+                        activity.signInSuccess(loggedInUser)
+                    }
+                    is MainActivity -> {
+                        activity.updateNavigationUserDetails(loggedInUser)
+                    }
                 }
-            }.addOnFailureListener {
-                Log.e( TAG,"Error writing document", it)
+            }
+            .addOnFailureListener { e ->
+                when (activity) {
+                    is SignInActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is MainActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+                Log.e(activity.javaClass.simpleName, "Error while getting loggedIn user details", e)
             }
     }
-    companion object{
-        private const val TAG = "SignInUser"
+
+    /**
+     * A function for getting the user id of current logged user.
+     */
+    fun getCurrentUserId(): String {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        var currentUserID = ""
+        if (currentUser != null) {
+            currentUserID = currentUser.uid
+        }
+
+        return currentUserID
     }
 }

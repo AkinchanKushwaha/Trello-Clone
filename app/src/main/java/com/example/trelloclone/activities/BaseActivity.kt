@@ -1,4 +1,4 @@
-package com.example.trelloclone.activites
+package com.example.trelloclone.activities
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
