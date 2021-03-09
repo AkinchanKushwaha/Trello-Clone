@@ -37,7 +37,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.nav_my_profile -> {
-                Toast.makeText(this@MainActivity, "My Profile", Toast.LENGTH_SHORT).show()
+               startActivity(Intent(this@MainActivity, MyProfileActivity::class.java))
             }
 
             R.id.nav_sign_out -> {
@@ -94,4 +94,5 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val navUsername = headerView.findViewById<TextView>(R.id.tv_username)
         navUsername.text = user.name
     }
+
 }
