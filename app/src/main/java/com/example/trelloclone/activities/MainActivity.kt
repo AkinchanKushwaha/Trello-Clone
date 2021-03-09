@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
 import com.example.trelloclone.R
@@ -23,7 +22,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupActionBar()
         nav_view.setNavigationItemSelectedListener(this)
 
-        FirestoreClass().signInUser(this@MainActivity)
+        FirestoreClass().loadUserData(this@MainActivity)
     }
 
     override fun onBackPressed() {

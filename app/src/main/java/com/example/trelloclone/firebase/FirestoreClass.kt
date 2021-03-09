@@ -3,6 +3,7 @@ package com.example.trelloclone.firebase
 import android.app.Activity
 import android.util.Log
 import com.example.trelloclone.activities.MainActivity
+import com.example.trelloclone.activities.MyProfileActivity
 import com.example.trelloclone.activities.SignInActivity
 import com.example.trelloclone.activities.SignUpActivity
 import com.example.trelloclone.models.User
@@ -40,7 +41,7 @@ class FirestoreClass {
     /**
      * A function to SignIn using firebase and get the user details from Firestore Database.
      */
-    fun signInUser(activity: Activity) {
+    fun loadUserData(activity: Activity) {
 
         mFireStore.collection(Constants.USERS)
             .document(getCurrentUserId())
@@ -55,6 +56,9 @@ class FirestoreClass {
                     }
                     is MainActivity -> {
                         activity.updateNavigationUserDetails(loggedInUser)
+                    }
+                    is MyProfileActivity ->{
+                        activity.setUserDataInUI(loggedInUser)
                     }
                 }
             }
