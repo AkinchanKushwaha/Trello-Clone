@@ -3,10 +3,8 @@ package com.example.trelloclone.firebase
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
-import com.example.trelloclone.activities.MainActivity
-import com.example.trelloclone.activities.MyProfileActivity
-import com.example.trelloclone.activities.SignInActivity
-import com.example.trelloclone.activities.SignUpActivity
+import com.example.trelloclone.activities.*
+import com.example.trelloclone.models.Board
 import com.example.trelloclone.models.User
 import com.example.trelloclone.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -98,6 +96,21 @@ class FirestoreClass {
             }
     }
 
+    fun createBoard(activity: CreateBoardActivity, board : Board){
+        mFireStore.collection(Constants.BOARDS)
+                .document()
+                .set(board, SetOptions.merge())
+                .addOnSuccessListener {
+                    Log.i(activity.javaClass.simpleName, " Board created Successfully.")
+                    Toast.makeText(activity, "Board Created Successfully", Toast.LENGTH_SHORT).show()
+                    activity.boardCreatedSuccessfully()
+                }
+                .addOnFailureListener {
+                    exception ->
+                    activity.hideProgressDialog()
+                    Log.e(activity.javaClass.simpleName," Error while creating a board.", exception)
+                }
+    }
 
     /**
      * A function for getting the user id of current logged user.

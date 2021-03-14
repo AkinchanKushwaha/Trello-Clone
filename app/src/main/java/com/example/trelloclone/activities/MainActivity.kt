@@ -12,12 +12,16 @@ import com.bumptech.glide.Glide
 import com.example.trelloclone.R
 import com.example.trelloclone.firebase.FirestoreClass
 import com.example.trelloclone.models.User
+import com.example.trelloclone.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var mUserName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,7 +31,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         FirestoreClass().loadUserData(this@MainActivity)
 
         fab_create_board.setOnClickListener{
-            startActivity(Intent(this, CreateBoardActivity::class.java))
+            val intent = Intent(this, CreateBoardActivity::class.java)
+            intent.putExtra(Constants.NAME, mUserName)
+            startActivity(intent)
         }
     }
 
@@ -86,6 +92,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
      * A function to get the current user details from firebase.
      */
     fun updateNavigationUserDetails(user: User) {
+
+        mUserName = user.name
+
         val headerView = nav_view.getHeaderView(0)
         val navUserImage = headerView.findViewById<ImageView>(R.id.iv_user_image)
 
