@@ -34,7 +34,6 @@
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_text_color"
                 android:textSize="@dimen/item_board_name_text_size"
                 tools:text="Board Name" />
 
