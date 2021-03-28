@@ -2,7 +2,6 @@ package com.example.trelloclone.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.projemanag.model.Task
 
 data class Board(
         val name : String = "",

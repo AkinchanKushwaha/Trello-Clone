@@ -12,7 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.trelloclone.R
-import com.example.trelloclone.adaptors.BoardItemsAdapter
+import com.example.trelloclone.adapters.BoardItemsAdapter
 import com.example.trelloclone.firebase.FirestoreClass
 import com.example.trelloclone.models.Board
 import com.example.trelloclone.models.User
