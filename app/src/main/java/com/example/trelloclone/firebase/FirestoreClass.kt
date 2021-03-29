@@ -140,15 +140,35 @@ class FirestoreClass {
             .get()
             .addOnSuccessListener { document ->
                 Log.e(activity.javaClass.simpleName, document.toString())
-
+                val board = document.toObject(Board::class.java)!!
+                board.documentID = document.id
                 // Send the result of board to the base activity.
-                activity.boardDetails(document.toObject(Board::class.java)!!)
+                activity.boardDetails(board)
             }
             .addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
             }
     }
+
+    fun addUpdateTaskList(activity: TaskListActivity, board: Board){
+        val taskListHashMap = HashMap<String, Any>()
+        taskListHashMap[Constants.TASK_LIST] = board.taskList
+
+        mFireStore.collection(Constants.BOARDS)
+                .document(board.documentID)
+                .update(taskListHashMap)
+                .addOnSuccessListener {
+                    Log.i(activity.javaClass.simpleName, "TaskList updated Successfully.")
+                    activity.addUpdateTaskListSuccess()
+                }
+                .addOnFailureListener {
+                    exception ->
+                    activity.hideProgressDialog()
+                    Log.i(activity.javaClass.simpleName, "Error while creating a board.", exception)
+                }
+    }
+
 
     /**
      * A function for getting the user id of current logged user.
