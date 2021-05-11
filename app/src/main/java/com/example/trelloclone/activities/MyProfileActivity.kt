@@ -204,7 +204,4 @@ class MyProfileActivity : BaseActivity() {
         finish()
     }
 
-    companion object{
-
-    }
 }

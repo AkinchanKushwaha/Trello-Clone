@@ -17,6 +17,7 @@ import com.google.firebase.firestore.SetOptions
  */
 class FirestoreClass {
 
+
     private val mFireStore = FirebaseFirestore.getInstance()
 
     /**

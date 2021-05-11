@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="@dimen/task_item_title_text_padding"
-                    android:textColor="@color/primary_text_color"
+                    android:textColor="@color/secondary_text_color"
                     android:textSize="@dimen/task_item_title_text_size"
                     tools:text="Title" />
 

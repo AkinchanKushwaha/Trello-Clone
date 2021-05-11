@@ -107,7 +107,7 @@ open class TaskListItemsAdapter(
                         context.updateTaskList(position, listName, model)
                     }
                 }else{
-                    Toast.makeText(context, "Please Enter a list name.  ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Please Enter a list name.", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -131,7 +131,7 @@ open class TaskListItemsAdapter(
                 if (cardName.isNotEmpty()) {
                     // Here we check the context is an instance of the TaskListActivity.
                     if (context is TaskListActivity) {
-                        // TODO add a card.
+                        context.addCardToTasklist(position, cardName)
                     }
                 } else {
                     Toast.makeText(context, "Please Enter a Card Name.", Toast.LENGTH_SHORT).show()
