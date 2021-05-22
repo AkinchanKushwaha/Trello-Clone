@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_create_board_activity"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -70,7 +70,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/create_board_btn_marginTop"
                     android:background="@drawable/shape_button_rounded"
-                    android:foreground="?attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center"
                     android:paddingTop="@dimen/btn_paddingTopBottom"
                     android:paddingBottom="@dimen/btn_paddingTopBottom"

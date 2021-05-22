@@ -43,7 +43,13 @@ class TaskListActivity : BaseActivity() {
             Log.e("Cancelled", "Cancelled")
         }
     }
-
+    fun cardDetails(taskListPosition: Int, cardPosition: Int){
+        var intent = Intent(this, CardDetailsActivity::class.java)
+        intent.putExtra(Constants.BOARD_DETAIL, mBoardDetails)
+        intent.putExtra(Constants.TASK_LIST_ITEM_POSITION, taskListPosition)
+        intent.putExtra(Constants.CARD_LIST_ITEM_POSITION, cardPosition)
+        startActivity(intent)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_members, menu)
