@@ -1,6 +1,8 @@
 package com.example.trelloclone.activities
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trelloclone.R
 import com.example.trelloclone.models.Board
@@ -19,7 +21,17 @@ class CardDetailsActivity : AppCompatActivity() {
         getIntentData()
         setupActionBar()
 
+        et_name_card_details.setText(mBoardDetails.taskList[mTaskListPosition].cards[mCardPosition].name)
+        //Set focus directly to the end of string.
+        et_name_card_details.setSelection(et_name_card_details.text.toString().length)
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_delete_card, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
 
     private fun setupActionBar() {
         setSupportActionBar(toolbar_card_details_activity)
