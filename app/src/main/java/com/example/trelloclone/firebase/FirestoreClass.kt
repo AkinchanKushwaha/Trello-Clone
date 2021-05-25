@@ -179,7 +179,7 @@ class FirestoreClass {
                 }
     }
 
-    fun getAssignedMembersListDetails(activity: MembersActivity, assignedTo: ArrayList<String>){
+    fun getAssignedMembersListDetails(activity: Activity, assignedTo: ArrayList<String>){
         mFireStore.collection(Constants.USERS)
             .whereIn(Constants.ID, assignedTo)
             .get()
@@ -192,10 +192,17 @@ class FirestoreClass {
                     val user = i.toObject(User::class.java)!!
                     usersList.add(user)
                 }
-
-                activity.setUpMembersList(usersList)
+                if(activity is MembersActivity){
+                    activity.setUpMembersList(usersList)
+                }else if(activity is TaskListActivity)
+                    activity.boardMembersDetailsList(usersList)
             }
             .addOnFailureListener{
+                if(activity is MembersActivity){
+                    activity.hideProgressDialog()
+                }else if(activity is TaskListActivity){
+                    activity.hideProgressDialog()
+                }
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.",it)
             }
     }
