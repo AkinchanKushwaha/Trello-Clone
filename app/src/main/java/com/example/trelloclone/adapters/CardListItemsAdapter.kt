@@ -5,9 +5,12 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trelloclone.R
+import com.example.trelloclone.activities.TaskListActivity
 import com.example.trelloclone.models.Card
+import com.example.trelloclone.models.SelectedMembers
 import kotlinx.android.synthetic.main.item_card.view.*
 
 
@@ -41,8 +44,38 @@ open class CardListItemsAdapter(
             }else{
                 holder.itemView.view_label_color.visibility = View.GONE
             }
-
             holder.itemView.tv_card_name.text = model.name
+
+            if((context as TaskListActivity).mAssignedMembersDetailList.size > 0){
+                val selectedMembersList: ArrayList<SelectedMembers> = ArrayList()
+
+                for(i in context.mAssignedMembersDetailList.indices){
+                    for(j in model.assignedTo){
+                        if(context.mAssignedMembersDetailList[i].id == j){
+                            val selectedMembers = SelectedMembers(
+                                context.mAssignedMembersDetailList[i].id,
+                                context.mAssignedMembersDetailList[i].image
+                            )
+                            selectedMembersList.add(selectedMembers)
+                        }
+                    }
+                }
+
+                if(selectedMembersList.size > 0){
+                    holder.itemView.rv_card_selected_members_list.visibility = View.VISIBLE
+                    holder.itemView.rv_card_selected_members_list.layoutManager = GridLayoutManager(context,4)
+                    val adapter = CardMemberListItemsAdapter(context, selectedMembersList, false)
+                    holder.itemView.rv_card_selected_members_list.adapter = adapter
+                    adapter.setOnClickListener(object : CardMemberListItemsAdapter.OnClickListener {
+                        override fun onClick() {
+                            onClickListener?.onClick(position)
+                        }
+                    })
+
+                }else{
+                    holder.itemView.rv_card_selected_members_list.visibility = View.GONE
+                }
+            }
             holder.itemView.setOnClickListener {
                 if(onClickListener != null){
                     onClickListener!!.onClick(position)

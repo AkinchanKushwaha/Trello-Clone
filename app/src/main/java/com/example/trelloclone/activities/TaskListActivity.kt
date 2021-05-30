@@ -88,13 +88,6 @@ class TaskListActivity : BaseActivity() {
         mBoardDetails = board
         hideProgressDialog()
         setupActionBar()
-        val addTaskList = Task(resources.getString(R.string.add_list))
-        board.taskList.add(addTaskList)
-        rv_task_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_task_list.setHasFixedSize(true)
-        val adapter = TaskListItemsAdapter(this, board.taskList)
-        rv_task_list.adapter = adapter
-
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getAssignedMembersListDetails(this, mBoardDetails.assignedTo)
     }
@@ -154,6 +147,13 @@ class TaskListActivity : BaseActivity() {
     fun boardMembersDetailsList(list:ArrayList<User>){
         mAssignedMembersDetailList = list
         hideProgressDialog()
+
+        val addTaskList = Task(resources.getString(R.string.add_list))
+        mBoardDetails.taskList.add(addTaskList)
+        rv_task_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv_task_list.setHasFixedSize(true)
+        val adapter = TaskListItemsAdapter(this, mBoardDetails.taskList)
+        rv_task_list.adapter = adapter
     }
 
     companion object{
