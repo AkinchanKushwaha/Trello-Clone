@@ -79,7 +79,7 @@ class CardDetailsActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.action_delete_card ->{
-                alertDialogForDeleteCard(mBoardDetails.taskList[mTaskListPosition].cards[mCardPosition].createdBy,)
+                alertDialogForDeleteCard()
                 return true
             }
         }
@@ -158,7 +158,7 @@ class CardDetailsActivity : BaseActivity() {
     }
 
     private fun membersListDialog(){
-        var cardAssignedMembersList = mBoardDetails
+        val cardAssignedMembersList = mBoardDetails
             .taskList[mTaskListPosition]
             .cards[mCardPosition]
             .assignedTo
@@ -239,7 +239,7 @@ class CardDetailsActivity : BaseActivity() {
         FirestoreClass().addUpdateTaskList(this@CardDetailsActivity, mBoardDetails)
     }
 
-    private fun alertDialogForDeleteCard(cardName: String) {
+    private fun alertDialogForDeleteCard() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(resources.getString(R.string.alert))
         builder.setMessage(
@@ -249,11 +249,11 @@ class CardDetailsActivity : BaseActivity() {
         )
         builder.setIcon(android.R.drawable.ic_dialog_alert)
 
-        builder.setPositiveButton(resources.getString(R.string.yes)) { dialogInterface, which ->
+        builder.setPositiveButton(resources.getString(R.string.yes)) { dialogInterface, _ ->
             dialogInterface.dismiss() // Dialog will be dismissed
             deleteCard()
         }
-        builder.setNegativeButton(resources.getString(R.string.no)) { dialogInterface, which ->
+        builder.setNegativeButton(resources.getString(R.string.no)) { dialogInterface, _ ->
             dialogInterface.dismiss() // Dialog will be dismissed
         }
         val alertDialog: AlertDialog = builder.create()
@@ -306,7 +306,7 @@ class CardDetailsActivity : BaseActivity() {
 
         val dpd = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            { _, _, monthOfYear, dayOfMonth ->
 
                 val sDayOfMonth = if (dayOfMonth < 10) "0$dayOfMonth" else "$dayOfMonth"
                 val sMonthOfYear =
