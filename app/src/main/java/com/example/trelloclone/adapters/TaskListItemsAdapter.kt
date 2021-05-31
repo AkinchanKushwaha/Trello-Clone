@@ -3,23 +3,30 @@ package com.example.trelloclone.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Resources
-import android.icu.text.CaseMap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trelloclone.R
 import com.example.trelloclone.activities.TaskListActivity
 import com.example.trelloclone.models.Task
 import kotlinx.android.synthetic.main.item_task.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 open class TaskListItemsAdapter(
         private val context: Context,
         private var list: ArrayList<Task>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
+    private var mPositionDraggedFrom = -1
+    private var mPositionDraggedTo = -1
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -147,14 +154,63 @@ open class TaskListItemsAdapter(
 
             adapter.setOnClickListener(
                 object : CardListItemsAdapter.OnClickListener{
-                    override fun onClick(cardPosition: Int) {
+                    override fun onClick(position: Int) {
                         if(context is TaskListActivity){
-                            context.cardDetails(position, cardPosition)
+                            context.cardDetails(position, position)
                         }
                     }
 
                 }
             )
+            val dividerItemDecoration = DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+            holder.itemView.rv_card_list.addItemDecoration(dividerItemDecoration)
+            val helper = ItemTouchHelper(
+                object : ItemTouchHelper.SimpleCallback(
+                    ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+                ){
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        dragged: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean {
+                        val draggedPosition = dragged.adapterPosition
+                        val targetPosition = target.adapterPosition
+
+                        if(mPositionDraggedFrom == -1){
+                            mPositionDraggedFrom = draggedPosition
+                        }
+                        mPositionDraggedTo = targetPosition
+                        Collections.swap(list[position].cards, draggedPosition, targetPosition)
+                        adapter.notifyItemMoved(draggedPosition, targetPosition)
+                        return false
+                    }
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                    }
+
+                    override fun clearView(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder
+                    ) {
+                        super.clearView(recyclerView, viewHolder)
+                        if(mPositionDraggedFrom != -1 && mPositionDraggedTo != -1 && mPositionDraggedFrom != mPositionDraggedTo){
+                            (context as TaskListActivity).updateCardsInTaskList(
+                                position,
+                                list[position].cards
+                            )
+                        }
+                        mPositionDraggedFrom = -1
+                        mPositionDraggedTo = -1
+
+                    }
+
+                }
+            )
+            helper.attachToRecyclerView(holder.itemView.rv_card_list)
         }
     }
 
@@ -188,7 +244,7 @@ open class TaskListItemsAdapter(
         builder.setMessage("Are you sure you want to delete $title.")
         builder.setIcon(android.R.drawable.ic_dialog_alert)
         //performing positive action
-        builder.setPositiveButton("Yes") { dialogInterface, which ->
+        builder.setPositiveButton("Yes") { dialogInterface, _ ->
             dialogInterface.dismiss() // Dialog will be dismissed
 
             if (context is TaskListActivity) {
@@ -197,7 +253,7 @@ open class TaskListItemsAdapter(
         }
 
         //performing negative action
-        builder.setNegativeButton("No") { dialogInterface, which ->
+        builder.setNegativeButton("No") { dialogInterface, _ ->
             dialogInterface.dismiss() // Dialog will be dismissed
         }
         // Create the AlertDialog
