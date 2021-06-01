@@ -74,7 +74,8 @@ class FirestoreClass {
                 Log.e(activity.javaClass.simpleName, "Error while getting loggedIn user details", e)
             }
     }
-    fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
+
+    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
         mFireStore.collection(Constants.USERS) // Collection Name
             .document(getCurrentUserId()) // Document ID
             .update(userHashMap) // A hashmap of fields which are to be updated.
@@ -84,11 +85,25 @@ class FirestoreClass {
 
                 Toast.makeText(activity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
 
-                // Notify the success result.
-                activity.profileUpdateSuccess()
+                when (activity) {
+                    is MainActivity -> {
+                        activity.tokenUpdateSuccess()
+                    }
+                    is MyProfileActivity -> {
+                        // Notify the success result.
+                        activity.profileUpdateSuccess()
+                    }
+                }
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
+                when (activity) {
+                    is MainActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is MyProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while creating a board.",
