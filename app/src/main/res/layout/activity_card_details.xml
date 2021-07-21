@@ -17,7 +17,7 @@
             android:id="@+id/toolbar_card_details_activity"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="?android:attr/colorPrimary"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/card_details_cv_card_name_marginBottom"
             android:elevation="@dimen/card_view_elevation"
+            style="@style/MyStyle.Cardview.white"
             app:cardCornerRadius="@dimen/card_view_corner_radius">
 
             <LinearLayout
@@ -44,6 +45,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -51,6 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_card_name"
+                        android:textColor="@color/secondary_text_color"
                         android:inputType="text"
                         android:textSize="@dimen/et_text_size"
                         tools:text="Test" />
@@ -63,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="@dimen/card_view_elevation"
+            style="@style/MyStyle.Cardview.white"
             app:cardCornerRadius="@dimen/card_view_corner_radius">
 
             <LinearLayout
@@ -86,7 +90,7 @@
                     android:layout_marginTop="@dimen/card_details_value_marginTop"
                     android:padding="@dimen/card_details_value_padding"
                     android:text="@string/select_color"
-                    android:textColor="@color/primary_text_color" />
+                    android:textColor="@color/secondary_text_color" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -103,7 +107,7 @@
                     android:layout_marginTop="@dimen/card_details_value_marginTop"
                     android:padding="@dimen/card_details_value_padding"
                     android:text="@string/select_members"
-                    android:textColor="@color/primary_text_color" />
+                    android:textColor="@color/secondary_text_color" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_selected_members_list"
@@ -128,7 +132,7 @@
                     android:layout_marginTop="@dimen/card_details_value_marginTop"
                     android:padding="@dimen/card_details_value_padding"
                     android:text="@string/select_due_date"
-                    android:textColor="@color/primary_text_color" />
+                    android:textColor="@color/secondary_text_color" />
 
                 <Button
                     android:id="@+id/btn_update_card_details"

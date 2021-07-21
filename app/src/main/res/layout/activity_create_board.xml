@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="@dimen/card_view_elevation"
+            style="@style/MyStyle.Cardview.white"
             app:cardCornerRadius="@dimen/card_view_corner_radius">
 
             <LinearLayout
@@ -51,6 +52,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_marginTop="@dimen/create_board_til_marginTop">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -58,6 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/board_name"
+                        android:textColor="@color/secondary_text_color"
                         android:inputType="text"
                         android:textSize="@dimen/et_text_size" />
 

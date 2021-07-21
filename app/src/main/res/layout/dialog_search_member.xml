@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/shape_dialog_rounded"
         app:cardCornerRadius="@dimen/dialog_member_cv_cornerRadius"
+        style="@style/MyStyle.Cardview.white"
         app:cardElevation="@dimen/dialog_member_cv_elevation">
 
         <LinearLayout
@@ -38,6 +39,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/secondary_text_color"
                 android:layout_marginTop="@dimen/member_dialog_til_email_marginTop">
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -45,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    android:textColor="@color/secondary_text_color"
                     android:inputType="textEmailAddress"
                     android:textSize="@dimen/et_text_size" />
             </com.google.android.material.textfield.TextInputLayout>

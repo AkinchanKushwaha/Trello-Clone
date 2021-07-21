@@ -61,7 +61,7 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/btn_text_size" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_sign_up_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

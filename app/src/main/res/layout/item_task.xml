@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="@dimen/task_item_cv_elevation"
+    style="@style/MyStyle.Cardview.white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/task_item_cv_margin"
             android:elevation="@dimen/task_item_cv_elevation"
+            style="@style/MyStyle.Cardview.white"
             android:visibility="gone"
             app:cardCornerRadius="@dimen/task_item_cv_corner_radius"
             tools:visibility="visible">
@@ -56,6 +58,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/secondary_text_color"
+                    android:textColorHint="@color/secondary_text_color"
                     android:autofillHints="@string/hint_list_name"
                     android:hint="@string/hint_list_name"
                     android:inputType="text" />
@@ -133,6 +137,7 @@
                 android:layout_margin="@dimen/task_item_cv_margin"
                 android:elevation="@dimen/task_item_cv_elevation"
                 android:visibility="gone"
+                style="@style/MyStyle.Cardview.white"
                 app:cardCornerRadius="@dimen/task_item_cv_corner_radius"
                 tools:visibility="visible">
 
@@ -156,6 +161,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/secondary_text_color"
+                        android:textColorHint="@color/secondary_text_color"
                         android:autofillHints="@string/hint_list_name"
                         android:hint="@string/hint_list_name"
                         android:inputType="text" />
@@ -184,6 +191,7 @@
                 android:layout_margin="@dimen/task_item_cv_margin"
                 android:elevation="@dimen/task_item_cv_elevation"
                 android:visibility="gone"
+                style="@style/MyStyle.Cardview.white"
                 app:cardCornerRadius="@dimen/task_item_cv_corner_radius"
                 tools:visibility="visible">
 
@@ -207,6 +215,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/secondary_text_color"
+                        android:textColorHint="@color/secondary_text_color"
                         android:autofillHints="@string/hint_card_name"
                         android:hint="@string/hint_card_name"
                         android:inputType="text" />

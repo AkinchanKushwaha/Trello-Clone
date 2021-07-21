@@ -47,6 +47,7 @@
             android:layout_marginTop="@dimen/authentication_screen_marginTop"
             android:layout_marginEnd="@dimen/authentication_screen_marginStartEnd"
             android:elevation="@dimen/card_view_elevation"
+            style="@style/MyStyle.Cardview.white"
             app:cardCornerRadius="@dimen/card_view_corner_radius">
 
             <LinearLayout
@@ -59,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -67,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
+                        android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/et_text_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
                     android:layout_marginTop="@dimen/authentication_screen_til_marginTop"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -83,6 +87,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
                         android:inputType="textPassword"
+                        android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/et_text_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 

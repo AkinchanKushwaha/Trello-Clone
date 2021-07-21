@@ -33,6 +33,7 @@
             android:layout_marginEnd="@dimen/my_profile_screen_content_marginStartEnd"
             android:layout_marginBottom="@dimen/my_profile_screen_content_marginTopBottom"
             android:elevation="@dimen/card_view_elevation"
+            style="@style/MyStyle.Cardview.white"
             app:cardCornerRadius="@dimen/card_view_corner_radius">
 
             <LinearLayout
@@ -52,6 +53,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_marginTop="@dimen/my_profile_name_til_marginTop">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -59,6 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name"
+                        android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/et_text_size" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -66,6 +69,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_marginTop="@dimen/my_profile_et_email_marginTop">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -75,6 +79,7 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:hint="@string/email"
+                        android:textColor="@color/secondary_text_color"
                         android:inputType="textEmailAddress"
                         android:textSize="@dimen/et_text_size" />
 
@@ -83,6 +88,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/secondary_text_color"
                     android:layout_marginTop="@dimen/my_profile_et_mobile_marginTop">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -90,6 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mobile"
+                        android:textColor="@color/secondary_text_color"
                         android:inputType="phone"
                         android:textSize="@dimen/et_text_size" />
 
